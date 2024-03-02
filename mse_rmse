@@ -1,20 +1,45 @@
+#importando numpy
 import numpy as np
 
+#função que calcula Mean Absolute Error
+def calcular_mae(y_true, y_pred):
+    mae = np.mean(np.abs(y_true - y_pred))
+    return mae
+
+#função que calcula Mean Squared Error
 def calcular_mse(y_true, y_pred):
     mse = np.mean((y_true - y_pred) ** 2)
     return mse
 
+#função que calcula Root Mean Squared Error
 def calcular_rmse(y_true, y_pred):
     mse = calcular_mse(y_true, y_pred)
     rmse = np.sqrt(mse)
     return rmse
 
+#função que calcula Taxa de Acerto
+def calcular_taxa_acerto(y_true, y_pred, margem_erro):
+    diferenca = np.abs(y_true - y_pred)
+    acertos = np.sum(diferenca <= margem_erro)
+    taxa_acerto = (acertos / len(y_true)) * 100
+    return taxa_acerto
 
-y_true = np.array([3, -0.5, 2, 7])
-y_pred = np.array([2.5, 0.0, 2, 8])
+#definindo variáveis (alterar para cada entrada)
+y_conhecido = np.array([3, -0.5, 2, 7])
+y_predito = np.array([2.5, 0.0, 2, 8])
+
+
+#printando o resultado a partir das variaveis (arrays) acima
+mae_resultado = calcular_mae(y_true, y_pred)
+print("MAE:", mae_resultado)
 
 mse_resultado = calcular_mse(y_true, y_pred)
 print("MSE:", mse_resultado)
 
 rmse_resultado = calcular_rmse(y_true, y_pred)
 print("RMSE:", rmse_resultado)
+
+#alterar qunado for necessário
+margem_erro = 0.5
+taxa_acerto = calcular_taxa_acerto(y_true, y_pred, margem_erro)
+print("Taxa de acerto dentro de uma margem de erro de ±0.5:", taxa_acerto, "%")
