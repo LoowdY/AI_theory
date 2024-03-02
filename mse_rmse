@@ -1,0 +1,20 @@
+import numpy as np
+
+def calcular_mse(y_true, y_pred):
+    mse = np.mean((y_true - y_pred) ** 2)
+    return mse
+
+def calcular_rmse(y_true, y_pred):
+    mse = calcular_mse(y_true, y_pred)
+    rmse = np.sqrt(mse)
+    return rmse
+
+
+y_true = np.array([3, -0.5, 2, 7])
+y_pred = np.array([2.5, 0.0, 2, 8])
+
+mse_resultado = calcular_mse(y_true, y_pred)
+print("MSE:", mse_resultado)
+
+rmse_resultado = calcular_rmse(y_true, y_pred)
+print("RMSE:", rmse_resultado)
